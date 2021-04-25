@@ -12,6 +12,7 @@ class PageManager {
   final buttonNotifier = ValueNotifier<ButtonState>(ButtonState.paused);
 
   late AudioPlayer _audioPlayer;
+  static const url = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3';
 
   PageManager() {
     _init();
@@ -20,7 +21,6 @@ class PageManager {
   void _init() async {
     // initialize the song
     _audioPlayer = AudioPlayer();
-    const url = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3';
     await _audioPlayer.setUrl(url);
 
     // listen for changes in player state
