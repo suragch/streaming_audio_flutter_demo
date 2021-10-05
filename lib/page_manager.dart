@@ -12,9 +12,9 @@ class PageManager {
   final buttonNotifier = ValueNotifier<ButtonState>(ButtonState.paused);
 
   late AudioPlayer _audioPlayer;
-  static const url = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3';
+  String url;
 
-  PageManager() {
+  PageManager({this.url="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"}) {
     _init();
   }
 
