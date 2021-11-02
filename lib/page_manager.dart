@@ -11,19 +11,18 @@ class PageManager {
   );
   final buttonNotifier = ValueNotifier<ButtonState>(ButtonState.paused);
 
-  late AudioPlayer _audioPlayer;
-  static const url = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3';
+  static const url =
+      'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3';
 
+  late AudioPlayer _audioPlayer;
   PageManager() {
     _init();
   }
 
   void _init() async {
-    // initialize the song
     _audioPlayer = AudioPlayer();
     await _audioPlayer.setUrl(url);
 
-    // listen for changes in player state
     _audioPlayer.playerStateStream.listen((playerState) {
       final isPlaying = playerState.playing;
       final processingState = playerState.processingState;
@@ -40,7 +39,6 @@ class PageManager {
       }
     });
 
-    // listen for changes in play position
     _audioPlayer.positionStream.listen((position) {
       final oldState = progressNotifier.value;
       progressNotifier.value = ProgressBarState(
@@ -50,7 +48,6 @@ class PageManager {
       );
     });
 
-    // listen for changes in the buffered position
     _audioPlayer.bufferedPositionStream.listen((bufferedPosition) {
       final oldState = progressNotifier.value;
       progressNotifier.value = ProgressBarState(
@@ -60,7 +57,6 @@ class PageManager {
       );
     });
 
-    // listen for changes in the total audio duration
     _audioPlayer.durationStream.listen((totalDuration) {
       final oldState = progressNotifier.value;
       progressNotifier.value = ProgressBarState(
@@ -71,7 +67,7 @@ class PageManager {
     });
   }
 
-  void play() async {
+  void play() {
     _audioPlayer.play();
   }
 
